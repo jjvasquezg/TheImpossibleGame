@@ -1,0 +1,75 @@
+class Cuadrado {
+
+    field int x, y;
+    field int tamaño;
+
+    constructor Cuadrado new(int ax, int ay, int t) {
+        let x = ax;
+        let y = ay;
+        let tamaño = t;
+        do dibujarCuadrado();
+        return this;
+    }
+
+    method void dibujarCuadrado(){
+
+      do Screen.setColor(true);
+      do Screen.drawRectangle(x, y, x + tamaño, y + tamaño);
+      return;
+
+    }
+
+   method void borrarCuadrado() {
+    
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x, y, x + tamaño, y + tamaño);
+      return;
+   }
+
+   method void arribaCuadrado() {
+        if (y > 1) {
+
+            do borrarCuadrado();
+            let y = y - 1;
+            do dibujarCuadrado();
+
+        }
+        return;
+   }
+
+   /** Moves the square down by 2 pixels (if possible). */
+   method void abajoCuadrado() {
+        if ((y + tamaño) < 254) {
+
+            do borrarCuadrado();
+            let y = y + 1;
+            do dibujarCuadrado();
+
+        }
+        return;
+   }
+
+   /** Moves the square left by 2 pixels (if possible). */
+   method void izquierdaCuadrado() {
+        if (x > 1) {
+
+            do borrarCuadrado();
+            let x = x - 1;
+            do dibujarCuadrado();
+                
+        }
+        return;
+   }
+
+   /** Moves the square right by 2 pixels (if possible). */
+   method void derechaCuadrado() {
+        if ((x + tamaño) < 510) {
+
+            do borrarCuadrado();
+            let x = x + 1;
+            do dibujarCuadrado();
+
+        }
+        return;
+   }
+}

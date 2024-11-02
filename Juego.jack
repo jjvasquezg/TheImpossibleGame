@@ -1,0 +1,92 @@
+class Juego {
+
+    field Cuadrado cuadrado;
+    field NivelUno niveluno;
+    field NivelDos niveldos;
+    field NivelTres niveltres;
+    field int iniX, iniY, tamaño, direccion;
+
+    constructor Juego nuevo(int x, int y, int t){
+
+        let iniX = x;
+        let iniY = y;
+        let tamaño = t;
+        let direccion = 0;
+
+        //let niveluno = niveluno.new();
+        let cuadrado = Cuadrado.new(iniX*16, iniY, t);
+
+        return this;
+
+    }
+
+    method void jugar(){
+
+        var char tecla;
+        var boolean salir;
+        let salir = false;
+
+        while(~salir){
+
+            while (tecla = 0) {
+                let tecla = Keyboard.keyPressed();
+            }
+            
+            if (tecla = 81)  { let salir = true; }     // q tecla
+
+            if (tecla = 131) { // flecha arriba
+
+                let direccion = 1;
+                while (tecla = 131) {
+                    let tecla = Keyboard.keyPressed();
+                    do moverCuadrado();
+                }                
+                
+            }   
+            if (tecla = 133) { // flecha abajo
+
+                let direccion = 2;
+                while (tecla = 133) {
+                    let tecla = Keyboard.keyPressed();
+                    do moverCuadrado();
+                }                
+                
+            }    
+
+            if (tecla = 130) { // flecha izquierda
+
+                let direccion = 3;
+                while (tecla = 130) {
+                    let tecla = Keyboard.keyPressed();
+                    do moverCuadrado();
+                }                
+                
+            }    
+
+            if (tecla = 132) { // flecha derecha
+
+                let direccion = 4;
+                while (tecla = 132) {
+                    let tecla = Keyboard.keyPressed();
+                    do moverCuadrado();
+                }                
+                
+                
+            }    
+
+        }
+
+        return;
+
+    }
+
+    method void moverCuadrado() {
+        if (direccion = 1) { do cuadrado.arribaCuadrado(); }
+        if (direccion = 2) { do cuadrado.abajoCuadrado(); }
+        if (direccion = 3) { do cuadrado.izquierdaCuadrado(); }
+        if (direccion = 4) { do cuadrado.derechaCuadrado(); }
+        do Sys.wait(20);  // delays the next movement
+        return;
+    }
+
+}
