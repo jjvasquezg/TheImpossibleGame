@@ -1,0 +1,63 @@
+class Circulo {
+
+    field int x, y, tamaño;
+
+    constructor Circulo new(int ax, int ay, int t) {
+        let x = ax;
+        let y = ay;
+        let tamaño = t;
+        do dibujarCirculo();
+        return this;
+    }
+
+    method void dibujarCirculo(){
+        
+        do Screen.setColor(true);
+        do Screen.drawCircle(x, y, tamaño);
+        return;
+
+    }
+
+   method void borrarCirculo() {
+    
+        do Screen.setColor(false);
+        do Screen.drawCircle(x, y, tamaño);
+        return;
+   }
+
+    method void arribaCirculo() {
+
+        do borrarCirculo();
+        let y = y - 1;
+        do dibujarCirculo();
+
+        return;
+    }
+
+    method void abajoCirculo() {
+
+        do borrarCirculo();
+        let y = y + 1;
+        do dibujarCirculo();
+
+        return;
+    }
+
+    method void izquierdaCirculo() {
+            
+        do borrarCirculo();
+        let x = x - 1;
+        do dibujarCirculo();
+
+        return;
+    }
+
+    method void derechaCirculo() {
+
+        do borrarCirculo();
+        let x = x + 1;
+        do dibujarCirculo();
+
+        return;
+    }
+}

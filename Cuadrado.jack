@@ -1,12 +1,13 @@
 class Cuadrado {
 
-    field int x, y;
-    field int tamaño;
+    field int x, y, base, tamaño, limite;
 
     constructor Cuadrado new(int ax, int ay, int t) {
-        let x = ax;
-        let y = ay;
+        let x = ax+16;
+        let y = ay+16;
         let tamaño = t;
+        let base = 16384;
+        let limite = 0;
         do dibujarCuadrado();
         return this;
     }
@@ -26,50 +27,73 @@ class Cuadrado {
       return;
    }
 
-   method void arribaCuadrado() {
-        if (y > 1) {
+//    method void arribaCuadrado() {
+//         if (y > 1) {
 
-            do borrarCuadrado();
+//             do Screen.setColor(false);
+//             do Screen.drawRectangle(x, (y + tamaño) - 1, x + tamaño, y + tamaño);
+//             let y = y - 1;
+//             do Screen.setColor(true);
+//             do Screen.drawRectangle(x, y, x + tamaño, y + 1);
+
+//         }
+//         return;
+//    }
+
+    method void arribaCuadrado() {
+
+        let limite = Memory.peek(base+(x+8/16)+(y*32)-32);
+        if (limite = 0) {
+
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x, (y + tamaño) - 1, x + tamaño, y + tamaño);
             let y = y - 1;
-            do dibujarCuadrado();
+            do Screen.setColor(true);
+            do Screen.drawRectangle(x, y, x + tamaño, y + 1);
 
         }
         return;
-   }
+    }
 
-   /** Moves the square down by 2 pixels (if possible). */
-   method void abajoCuadrado() {
-        if ((y + tamaño) < 254) {
+    method void abajoCuadrado() {
 
-            do borrarCuadrado();
+        let limite = Memory.peek(base+(x-8+tamaño/16)+(y+tamaño*32)+32);
+        if (limite = 0) {
+
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x, y, x + tamaño, y + 1);
             let y = y + 1;
-            do dibujarCuadrado();
+            do Screen.setColor(true);
+            do Screen.drawRectangle(x, (y + tamaño) - 1, x + tamaño, y + tamaño);
 
         }
         return;
-   }
+    }
 
-   /** Moves the square left by 2 pixels (if possible). */
-   method void izquierdaCuadrado() {
-        if (x > 1) {
+    method void izquierdaCuadrado() {
 
-            do borrarCuadrado();
+        if (x>1) {
+            
+            do Screen.setColor(false);
+            do Screen.drawRectangle((x + tamaño) - 1, y, x + tamaño, y + tamaño);
             let x = x - 1;
-            do dibujarCuadrado();
+            do Screen.setColor(true);
+            do Screen.drawRectangle(x, y, x + 1, y + tamaño);
                 
         }
         return;
-   }
+    }
 
-   /** Moves the square right by 2 pixels (if possible). */
-   method void derechaCuadrado() {
+    method void derechaCuadrado() {
         if ((x + tamaño) < 510) {
 
-            do borrarCuadrado();
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x, y, x + 1, y + tamaño);
             let x = x + 1;
-            do dibujarCuadrado();
+            do Screen.setColor(true);
+            do Screen.drawRectangle((x + tamaño) - 1, y, x + tamaño, y + tamaño);
 
         }
         return;
-   }
+    }
 }
